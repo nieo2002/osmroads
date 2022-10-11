@@ -116,26 +116,7 @@ def data_write_csv_aggre(file_name, datas):
         data = (key, int(file_dict[key][0]),float(file_dict[key][1]) )
         writer.writerow(data)
 
-#if __name__ == '__main__':
-
-#sql_cmd = 'select x1,y1,x2,y2,polygon,city from osm_city_polygon;'
-#try:
-#    values = {"dpAddress":"150849B971421009",
-#        "payload": 
-#        "{\"selectSql\":\"" + sql_cmd + "\"}"}
-#    values_json = json.dumps(values)
-#    response = requests.post(url, headers={'content-type':'application/json'},data=values_json)
-#    js = response.json()
-#    data = js["data"]
-#    lst = parse_data(data)
-#    dataframe = pd.DataFrame(lst)
-#    total = dataframe.size
-#except Exception as e1:
-#    print("select osm_city_polygon error...",e1)
-#    exit(0)
-
 #load polygon from csv
-#polygon = np.loadtxt('./polygon.csv', delimiter=';')
 polygon = np.loadtxt('./polygon.csv',
         dtype={'names': ('x1', 'y1', 'x2','y2','npstr','city'),
         'formats': ('f4', 'f4', 'f4','f4','S2000','S40')},delimiter=';')
