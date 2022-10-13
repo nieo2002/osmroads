@@ -19,7 +19,7 @@ data_list_total = manager.list([])
 cnt = 1
 
 #中枢访问地址
-url = "http://192.168.15.41:43000/api/getData"
+url = "https://pre.citybrain.org/api/getData"
 
 def parse_data(content):
     content = json.loads(content)
