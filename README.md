@@ -10,7 +10,7 @@ GDAL下载地址： http://download.osgeo.org/gdal/2.4.1/gdal-2.4.1.tar.gz
 ## Step 2
 准备城市路网边界。
 可以使用[阿里云提供的边界编辑器](http://datav.aliyun.com/portal/school/atlas/area_generator)，生成并下载对应城市的GeoJSON格式的城市边界文件。
-注意：需要每个城市生成一个对应的GeoJSON文件。测试可参照test_cities目录下的城市。
+注意：需要每个城市生成一个对应的GeoJSON文件。测试可参照test_city目录下的城市。
 
 
 ## Step 3
