@@ -54,7 +54,7 @@ def search_info(start,dataframe):
                         'from( ' + \
                             'SELECT lsid,geo_distance(x1,y1,x2,y2) as distance  ' + \
                                 'FROM ( ' + \
-                                '  select lsid,osmid_start_x x1,osmid_start_y y1, osmid_end_x x2,osmid_end_y y2, nppoly(osmid_start_x,osmid_start_y,\'' + npstr + '\') as nppoly  ' + \
+                                '  select lsid,osmid_start_x x1,osmid_start_y y1, osmid_end_x x2,osmid_end_y y2, pnpoly(osmid_start_x,osmid_start_y,\'' + npstr + '\') as nppoly  ' + \
                                 '  from osm_split_edge_roadnet_t  ' + \
                                 '  where osmid_start_x  < ' + str(lon2) + ' and osmid_start_x >  ' + str(lon1) + '  and osmid_start_y < ' + str(lat2) + '  and osmid_start_y > ' + str(lat1)  +  \
                                 ' ) ' + \
