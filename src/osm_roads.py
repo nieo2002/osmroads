@@ -45,8 +45,8 @@ def search_info(start,dataframe):
         lat1 = float(osm[1])
         lon2 = float(osm[2])
         lat2 = float(osm[3])     
-        npstr= str(osm[4])[2:-1]
-        city = str(osm[5])[2:-1]
+        npstr= str(osm[4])
+        city = str(osm[5])
 
         sql_cmd =  'select count(1) as edges,sum(distance) as distance ' + \
                    'from ( ' + \
@@ -76,8 +76,9 @@ def search_info(start,dataframe):
 
         if len(data) > 2:
             item = lst.popitem()
-            ls = [item[1][0][0],item[1][0][1],city]
-            data_list.append(ls)
+            if int(item[1][0][0]) > 0:
+                ls = [item[1][0][0],item[1][0][1],city]
+                data_list.append(ls)
     except Exception as e1:
         ls = [0,0,city]
         data_list.append(ls)
@@ -119,8 +120,8 @@ def data_write_csv_aggre(file_name, datas):
 #load polygon from csv
 polygon = np.loadtxt('./polygon.csv',
         dtype={'names': ('x1', 'y1', 'x2','y2','npstr','city'),
-        'formats': ('f4', 'f4', 'f4','f4','S2000','S40')},delimiter=';')
-dataframe = pd.DataFrame(polygon)
+        'formats': ('f4', 'f4', 'f4','f4','S20000','S40')},delimiter=';')
+dataframe = pd.DataFrame(polygon,index=[0])
 total = dataframe.size
 
 #启动时间
