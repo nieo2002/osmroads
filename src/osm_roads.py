@@ -40,13 +40,13 @@ def search_info(start,dataframe):
     data_list = []
     try:
 
-        osm = dataframe.loc[start].values
+        osm = dataframe[start]
         lon1 = float(osm[0])
         lat1 = float(osm[1])
         lon2 = float(osm[2])
         lat2 = float(osm[3])     
-        npstr= str(osm[4])
-        city = str(osm[5])
+        npstr= str(osm[4])[2:-1]
+        city = str(osm[5])[2:-1]
 
         sql_cmd =  'select count(1) as edges,sum(distance) as distance ' + \
                    'from ( ' + \
@@ -121,8 +121,7 @@ def data_write_csv_aggre(file_name, datas):
 polygon = np.loadtxt('./polygon.csv',
         dtype={'names': ('x1', 'y1', 'x2','y2','npstr','city'),
         'formats': ('f4', 'f4', 'f4','f4','S20000','S40')},delimiter=';')
-dataframe = pd.DataFrame(polygon,index=[0])
-total = dataframe.size
+total = len(polygon)
 
 #启动时间
 time1 = time.time()
@@ -135,7 +134,7 @@ for j in tqdm(range(int(total/cnt)+1)):
         for i in range(cnt):
             if( j*cnt + i >= total):
                 break
-            pool.apply_async(func=search_info,args=(j*cnt + i,dataframe))
+            pool.apply_async(func=search_info,args=(j*cnt + i,polygon))
 
     finally:
         pool.close()
