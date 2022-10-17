@@ -39,14 +39,20 @@ def search_info(start,dataframe):
 
     data_list = []
     try:
-
-        osm = dataframe[start]
-        lon1 = float(osm[0])
-        lat1 = float(osm[1])
-        lon2 = float(osm[2])
-        lat2 = float(osm[3])     
-        npstr= str(osm[4])[2:-1]
-        city = str(osm[5])[2:-1]
+        if dataframe[0].size > 1:
+            lon1 = float(dataframe[0][start])
+            lat1 = float(dataframe[1][start])
+            lon2 = float(dataframe[2][start])
+            lat2 = float(dataframe[3][start])
+            npstr= str(dataframe[4][start])[2:-1]
+            city = str(dataframe[5][start])[2:-1]
+        else:
+            lon1 = float(dataframe[0])
+            lat1 = float(dataframe[1])
+            lon2 = float(dataframe[2])
+            lat2 = float(dataframe[3])
+            npstr= str(dataframe[4])[2:-1]
+            city = str(dataframe[5])[2:-1]  
 
         sql_cmd =  'select count(1) as edges,sum(distance) as distance ' + \
                    'from ( ' + \
@@ -120,8 +126,8 @@ def data_write_csv_aggre(file_name, datas):
 #load polygon from csv
 polygon = np.loadtxt('./polygon.csv',
         dtype={'names': ('x1', 'y1', 'x2','y2','npstr','city'),
-        'formats': ('f4', 'f4', 'f4','f4','S20000','S40')},delimiter=';')
-total = len(polygon)
+        'formats': ('f4', 'f4', 'f4','f4','S400000','S40')},delimiter=';',,unpack=True)
+total = polygon[0].size
 
 #启动时间
 time1 = time.time()
