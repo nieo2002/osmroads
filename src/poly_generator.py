@@ -131,7 +131,7 @@ def listDir(rootDir,x_split_size,y_split_size,points_split):
                                     data_list.append((ix1,iy1,ix2,iy2,json_points,city))
                                     print("deal with inner bbox...")
         else:
-            listDir(pathname)
+            listDir(pathname,x_split_size,y_split_size,points_split)
 
 def data_write_csv(file_name, datas):
     file_csv = codecs.open(file_name,'w+','utf-8')
