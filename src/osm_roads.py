@@ -126,7 +126,7 @@ def data_write_csv_aggre(file_name, datas):
 #load polygon from csv
 polygon = np.loadtxt('./polygon.csv',
         dtype={'names': ('x1', 'y1', 'x2','y2','npstr','city'),
-        'formats': ('f4', 'f4', 'f4','f4','S400000','S40')},delimiter=';',,unpack=True)
+        'formats': ('f4', 'f4', 'f4','f4','S400000','S40')},delimiter=';',unpack=True)
 total = polygon[0].size
 
 #启动时间
