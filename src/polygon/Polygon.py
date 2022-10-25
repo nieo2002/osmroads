@@ -53,10 +53,25 @@ def build_polygon_from_gadmfile(dir):
 
                 i=0
                 for district in  gdf.iloc:
+
                     try:
-                        city = district[6]
-                        province = district[4]
-                        country = district[1]
+
+                        country = district['COUNTRY']
+                        level1 = ''
+                        level2 = ''
+                        level3 = ''
+                        try:
+                            level1 = district['NAME_1']
+                        except Exception as name_1_error:
+                            pass                        
+                        try:
+                            level2 = district['NAME_2']
+                        except Exception as name_2_error:
+                            pass
+                        try:
+                            level3 = district['NAME_3']
+                        except Exception as name_3_error:
+                            pass                        
 
                         #bound box
                         X1=district.geometry.bounds[0] 
@@ -69,11 +84,11 @@ def build_polygon_from_gadmfile(dir):
 
                             if type =='Polygon':
                                 #simple polygon
-                                data_list.append((country,province,city,X1,Y1,X2,Y2,str(polygon)))
+                                data_list.append((country,level1,level2,level3,X1,Y1,X2,Y2,str(polygon)))
                             else:
                                 #multi polygon
                                 for polygon_points in polygon:
-                                    data_list.append((country,province,city,X1,Y1,X2,Y2,str(polygon_points)))
+                                    data_list.append((country,level1,level2,level3,X1,Y1,X2,Y2,str(polygon_points)))
                     except Exception as error:
                         print(pathname)
                                 
