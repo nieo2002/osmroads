@@ -50,12 +50,16 @@ def osm_road_distances(country,level1,level2=None,level3=None,limit=1000):
             ')'
             
             road = fetch_data_from_ns(sql_cmd)
+            level2s=''
+            level3s=''
             if level2 is None:
                 level2s = city
-                level3s = ''
             else:
+                level2s = level2
                 if level3 is None:
                     level3s = city
+                else:
+                    level3s = level3
                 
             result = {'country':country,'province':level1,'city':level2s,'district':level3s,'value':road}
             roads.append(result)
