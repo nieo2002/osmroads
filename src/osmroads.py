@@ -9,11 +9,11 @@ def osm_road_distances(country,level1,level2=None,level3=None,limit=1000):
         print('parameter country and level1 can not be None.')
         return []
     else:
-        sql_cmd = ' select osmid from osm_city_id where level = 1 and  upper(name)=\'' + level1.upper()  + '\' and parent in ( select osmid from osm_city_id where level =0 and parent = \'' + ' \' and upper(name)=\'' + country.upper() + '\')'
+        sql_cmd = ' select osmid from osm_city_id where level = 1 and  name =\'' + level1  + '\' and parent in ( select osmid from osm_city_id where level =0 and parent = \'' + ' \' and upper(name)=\'' + country.upper() + '\')'
         if level2 is not None:
-            sql_cmd = ' select osmid from osm_city_id where level = 2 and  upper(name)= \'' + level2.upper()  + '\' and parent in (' + sql_cmd + ' )'
+            sql_cmd = ' select osmid from osm_city_id where level = 2 and  name = \'' + level2  + '\' and parent in (' + sql_cmd + ' )'
             if level3 is not None:
-                sql_cmd = ' select osmid from osm_city_id where level = 3 and  upper(name)= \'' + level3.upper()  + '\' and parent in (' + sql_cmd + ' )'
+                sql_cmd = ' select osmid from osm_city_id where level = 3 and  name = \'' + level3  + '\' and parent in (' + sql_cmd + ' )'
             else:
                 sql_cmd = 'select osmid from osm_city_id where level = 3 and parent in ( ' + sql_cmd + ' )'
         else:
