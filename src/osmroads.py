@@ -3,14 +3,12 @@ from cs.CentralSystem import fetch_data_from_ns
 
 def osm_road_lengths_v2(cityname,limit=1000):
     
-    sql_cmd = 'select distinct name.name, boundary.polygon, boundary.x1,boundary.y1,boundary.x2,boundary.y2 from osm_city_names name, osm_city_boundary boundary where name.osm_id = boundary.osmid and name.name=\'' +  cityname + '\' ' 
+    sql_cmd = 'select distinct name.city, boundary.polygon, boundary.x1,boundary.y1,boundary.x2,boundary.y2 from osm_city_names_aligned name, osm_city_boundary boundary where name.osmid = boundary.osmid and name.city=\'' +  cityname + '\' ' 
     sql_cmd += ' limit ' + str(limit)
  
     roads = []
     try:
         pologyons = fetch_data_from_ns(sql_cmd)
-        lengths = 0.0
-
         for data in pologyons['value']:
             city = data[0]
             lon1 = data[2]
