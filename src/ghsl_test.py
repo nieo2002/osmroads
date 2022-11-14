@@ -1,5 +1,5 @@
 #coding:utf-8
-from ghsl import ghsl_population_query
+from ghsl import ghsl_population_v2
 
-populations = ghsl_population_query(level2='济南市',level1='山东省',country='China')
+populations = ghsl_population_v2('Weißpriach')
 print(populations)
