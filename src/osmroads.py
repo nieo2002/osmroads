@@ -55,17 +55,17 @@ def osm_road_lengths(country,level1,level2=None,level3=None,limit=1000):
         return []
     else:
         level1 = level1.replace('\'',' ')
-        sql_cmd = ' select osmid from osm_city_id where level = 1 and  regexp_replace(name,"\'"," ")=\'' + level1  + '\' and parent in ( select osmid from osm_city_id where level =0 and parent = \'' + ' \' and name=\'' + country + '\')'
+        sql_cmd = ' select osmid from osm_city_id where level = 2 and  regexp_replace(name,"\'"," ")=\'' + level1  + '\' and parent in ( select osmid from osm_city_id where level =0 and parent = \'' + ' \' and name=\'' + country + '\')'
         if level2 is not None:
             level2 = level2.replace('\'',' ')
-            sql_cmd = ' select osmid from osm_city_id where level = 2 and  regexp_replace(name,"\'"," ")= \'' + level2  + '\' and parent in (' + sql_cmd + ' )'
+            sql_cmd = ' select osmid from osm_city_id where level = 3 and  regexp_replace(name,"\'"," ")= \'' + level2  + '\' and parent in (' + sql_cmd + ' )'
             if level3 is not None:
                 level3 = level3.replace('\'',' ')
-                sql_cmd = ' select osmid from osm_city_id where level = 3 and  regexp_replace(name,"\'"," ")= \'' + level3  + '\' and parent in (' + sql_cmd + ' )'
+                sql_cmd = ' select osmid from osm_city_id where level = 4 and  regexp_replace(name,"\'"," ")= \'' + level3  + '\' and parent in (' + sql_cmd + ' )'
             else:
-                sql_cmd = 'select osmid from osm_city_id where level = 3 and parent in ( ' + sql_cmd + ' )'
+                sql_cmd = 'select osmid from osm_city_id where level = 4 and parent in ( ' + sql_cmd + ' )'
         else:
-            sql_cmd = 'select osmid from osm_city_id where level =2 and parent in ( ' + sql_cmd + ' )'
+            sql_cmd = 'select osmid from osm_city_id where level =3 and parent in ( ' + sql_cmd + ' )'
 
     sql_cmd += ' limit ' + str(limit)
     sql_cmd = 'select distinct localname,polygon,x1,y1,x2,y2,level from osm_city_boundary where osmid in ( ' + sql_cmd + ') '
