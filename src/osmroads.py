@@ -1,7 +1,7 @@
 #coding:utf-8
 from cs.CentralSystem import fetch_data_from_ns
 
-def osm_road_lengths_v2(cityname,limit=1000):
+def osmroads(cityname,limit=1000):
     
     cityname = cityname.replace('\'',' ')
     sql_cmd = 'select distinct name.city, boundary.polygon, boundary.x1,boundary.y1,boundary.x2,boundary.y2,name.lon,name.lat from osm_city_names_aligned name, osm_city_boundary boundary where name.osmid = boundary.osmid and regexp_replace(name.city,"\'"," ")=\'' +  cityname + '\' ' 
