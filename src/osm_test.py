@@ -1,7 +1,7 @@
 #coding:utf-8
-from osmroads import osm_road_lengths_v2
+from osmroads import osmroads
 
-distance = osm_road_lengths_v2('Weißpriach')
+distance = osmroads('Weißpriach')
 print(distance)
 
 
