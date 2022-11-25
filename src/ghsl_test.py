@@ -1,5 +1,5 @@
 #coding:utf-8
-from ghsl import ghsl_population_v2
+from ghsl import ghslpopulation
 
 populations = ghslpopulation('Weißpriach')
 print(populations)
