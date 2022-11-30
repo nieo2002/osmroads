@@ -1,7 +1,7 @@
 #coding:utf-8
 from osmroads import osmroads
 
-distance = osmroads('Weißpriach')
+distance = osmroads('Beijing')
 print(distance)
 
 
